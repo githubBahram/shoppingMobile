@@ -19,7 +19,7 @@ export default [
   [
     {
       id: '4',
-      title: 'گوشت ، تخم مرغ و فرآورده های لبنی ',
+      title: 'گوشت و تخم مرغ',
       image: require('../assets/images/p3.png'),
     },
     {

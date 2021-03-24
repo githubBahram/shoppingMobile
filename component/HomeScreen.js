@@ -24,7 +24,7 @@ const HomeScreen = ({navigation}) => {
         container: {
             flex: 1,
             backgroundColor: '#f8fffa',
-            fontFamily:'IRANSansMobile',
+            fontFamily: 'IRANSansMobile',
 
         },
         header: {
@@ -124,43 +124,44 @@ const HomeScreen = ({navigation}) => {
         chips: {
             color: '#fff',
             textTransform: 'uppercase',
-            fontFamily:'IRANSansMobile_Bold',
-            fontSize:14
+            fontFamily: 'IRANSansMobile_Bold',
+            fontSize: 14
         },
         highlightImage: {
             height: 100,
             width: 100,
         },
         highlightTitle: {
-            fontFamily:'IRANSansMobile',
+            fontFamily: 'IRANSansMobile',
             fontSize: 14,
             textTransform: 'uppercase',
             color: '#fff',
             marginBottom: 5,
         },
         highlightSubtitle: {
-            fontFamily:'IRANSansMobile',
+            fontFamily: 'IRANSansMobile',
             fontSize: 12,
             color: '#fff',
         },
         categoryWrapper: {
-            paddingHorizontal: 20,
             marginTop: 20,
-            flex: 1,
+
+            flex: 1
         },
         category: {
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
+            paddingHorizontal: 20,
         },
         categoryTitle: {
-            fontFamily:'IRANSansMobile_Bold',
+            fontFamily: 'IRANSansMobile_Bold',
             fontSize: 14,
             color: '#00312d',
 
         },
         categorySubtitle: {
-            fontFamily:'IRANSansMobile',
+            fontFamily: 'IRANSansMobile',
             fontSize: 12,
             color: '#4f7985',
             textDecorationLine: 'underline',
@@ -168,6 +169,7 @@ const HomeScreen = ({navigation}) => {
         footerIcon: {
             color: '#6d8f9a',
         },
+
     });
     const Highlight = ({item}) => {
         return (
@@ -178,10 +180,10 @@ const HomeScreen = ({navigation}) => {
                     </View>
                     <Image source={item.image} style={styles.highlightImage}/>
                 </View>
-                <View>
+
                     <Text style={styles.highlightTitle}>{item.title}</Text>
                     <Text style={styles.highlightSubtitle}>{item.subtitle}</Text>
-                </View>
+
             </View>
         );
     };
@@ -227,65 +229,79 @@ const HomeScreen = ({navigation}) => {
                         <Text style={styles.categorySubtitle}>بازید همه</Text>
                     </View>
                 </View>
-                <ScrollView style={{
-                    marginTop: 10,
-                }}>
-                    {
-                        categories.map((chunk, index) => {
-                            return (
-                                <View key={index} style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'center',
-                                    marginTop: 10,
-                                }}>
-                                    {
-                                        chunk.map(category => {
-                                            return (
-                                                <TouchableHighlight
-                                                    activeOpacity={0.6}
-                                                    key={category.id}
-                                                    underlayColor="#DDDDDD"
-                                                    onPress={() => navigation.navigate('Products')}>
-                                                    <View key={category.id} style={{
-                                                        width: width / 3 - 30,
-                                                        marginHorizontal: 10,
-                                                        justifyContent: 'center',
-                                                        marginBottom: 20,
-                                                    }}>
-                                                        <View
-                                                            style={{
-                                                                position: 'absolute',
-                                                                top: 0,
-                                                                backgroundColor: '#def6e6',
-                                                                borderRadius: 10,
-                                                                width: width / 3 - 30,
-                                                                height: width / 3 - 55,
-                                                            }}
-                                                        />
-                                                        <View>
-                                                            <Image source={category.image} style={{
-                                                                width: width / 3 - 30,
-                                                                height: width / 3 - 30,
-                                                            }}/>
-                                                            <Text style={{
-                                                                textAlign: 'center',
-                                                                fontFamily:'IRANSansMobile',
-                                                                fontSize:12
-                                                            }}>{category.title}</Text>
-                                                        </View>
-                                                    </View>
-                                                </TouchableHighlight>
-                                            );
-                                        })
-                                    }
-                                </View>
-                            );
-                        })
-                    }
-                </ScrollView>
-            </View>
-            <OrderConfirmed/>
+                <View
+                    style={{
+                        flex: 1
+                    }}>
+                    <View style={{
+                        flex:0.9,
+                        marginTop: 10,
+                    }}>
+                        <ScrollView style={{
+                        }}>
+                            {
+                                categories.map((chunk, index) => {
+                                    return (
+                                        <View key={index} style={{
+                                            flexDirection: 'row',
+                                            justifyContent: 'center',
+                                            marginTop: 10,
 
+                                        }}>
+                                            {
+                                                chunk.map(category => {
+                                                    return (
+                                                        <TouchableHighlight
+                                                            activeOpacity={0.6}
+                                                            key={category.id}
+                                                            underlayColor="#DDDDDD"
+                                                            onPress={() => navigation.navigate('Products')}>
+                                                            <View key={category.id} style={{
+                                                                width: width / 3 - 30,
+                                                                marginHorizontal: 10,
+                                                                justifyContent: 'center',
+                                                                marginBottom: 20,
+                                                            }}>
+                                                                <View
+                                                                    style={{
+                                                                        position: 'absolute',
+                                                                        top: 0,
+                                                                        backgroundColor: '#def6e6',
+                                                                        borderRadius: 10,
+                                                                        width: width / 3 - 30,
+                                                                        height: width / 3 - 55,
+                                                                    }}
+                                                                />
+                                                                <View>
+                                                                    <Image source={category.image} style={{
+                                                                        width: width / 3 - 30,
+                                                                        height: width / 3 - 30,
+                                                                    }}/>
+                                                                    <Text style={{
+                                                                        textAlign: 'center',
+                                                                        fontFamily: 'IRANSansMobile',
+                                                                        fontSize: 12
+                                                                    }}>{category.title}</Text>
+                                                                </View>
+                                                            </View>
+                                                        </TouchableHighlight>
+                                                    );
+                                                })
+                                            }
+                                        </View>
+                                    );
+                                })
+                            }
+                        </ScrollView>
+                    </View>
+                    <View style={{
+                        flex:0.1,
+                        marginTop:10
+                    }}>
+                        <OrderConfirmed/>
+                    </View>
+                </View>
+            </View>
         </View>
     );
 };

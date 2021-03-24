@@ -45,3 +45,5 @@ mvnw
 HELP.md
 /node_modules/
 /.idea/
+**/app/build
+/.gradle/

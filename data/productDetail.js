@@ -45,4 +45,5 @@ export default [
         name: 'دوغ ترش محلات',
         image: require('../assets/product/7.jpg'),
     },
+
 ];

@@ -22,6 +22,7 @@ import dayries from '../data/dayries';
 import productDetail from '../data/productDetail';
 
 const {width, height} = Dimensions.get('window');
+
 const Header = () => {
     return (
         <View>
@@ -66,25 +67,11 @@ const ProductCategory = ({item}) => {
         </View>
     );
 };
-const OrderList = () => {
-    const orders = useSelector(state => state.orders);
-    const renderOrder = orders.map(order => (
-        <View key={order.id}>
-            <Text>{order.title}</Text>
-            <Text>{order.amount}</Text>
-        </View>
-    ));
-    return (
-        <View>
-            {renderOrder}
-        </View>
-    );
-};
+
 const ProductDetail = ({item}) => {
     return (
         <View style={{
             flexDirection: 'row',
-
         }}>
             <View style={{
                 justifyContent: 'center',
@@ -93,7 +80,6 @@ const ProductDetail = ({item}) => {
                 <View style={{
                     flex: 1,
                     width: width / 2,
-
                     borderColor: '#e8e8e8',
                     borderWidth: .5,
                 }}>
@@ -119,8 +105,6 @@ const ProductDetail = ({item}) => {
                         1600تومان
                     </Text>
                     <AddComponent id={item.id} amount={Number(1600)}/>
-
-
                 </View>
 
             </View>
@@ -130,7 +114,7 @@ const ProductDetail = ({item}) => {
 };
 
 const Product = ({navigation}) => {
-
+    const ordersLength = useSelector(state => state.orders.length);
     const styles = StyleSheet.create({
         headerWrapper: {
             flex: 1,
@@ -181,9 +165,6 @@ const Product = ({navigation}) => {
         },
     });
 
-
-    const [count, setCount] = React.useState(0);
-
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerTitle: props => <Header/>,
@@ -225,16 +206,28 @@ const Product = ({navigation}) => {
                     horizontal
                     showsHorizontalScrollIndicator={false}/>
             </View>
-            <View>
-                <FlatList
-                    key={'#'}
-                    data={productDetail}
-                    renderItem={ProductDetail}
-                    keyExtractor={(item) => item.id}
-                    numColumns={2}
-                />
+            <View
+                style={{
+                    flex: 1
+                }}>
+                <View style={{
+                    flex: ordersLength > 1 ? 0.9 : 1
+                }}>
+                    <FlatList
+                        key={'#'}
+                        data={productDetail}
+                        renderItem={ProductDetail}
+                        keyExtractor={(item) => item.id}
+                        numColumns={2}
+                    />
+                </View>
+                <View style={{
+                    flex: ordersLength > 1 ? 0.1 : 0
+                }}>
+                    <OrderConfirmed/>
+                </View>
+
             </View>
-            <OrderConfirmed/>
         </View>
     );
 

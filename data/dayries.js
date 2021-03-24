@@ -35,5 +35,10 @@ export default [
         name: 'دوغ',
         image: require('../assets/product/7.jpg'),
     },
+    {
+        id: '8',
+        name: 'شکلات',
+        image: require('../assets/product/7.jpg'),
+    },
 
 ];

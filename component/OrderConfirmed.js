@@ -13,26 +13,26 @@ const OrderConfirmed = () => {
             <View style={{
                 position: 'absolute',
                 bottom: 0,
-                flex:1,
                 backgroundColor: '#fff',
                 width,
 
-                borderTop:1
-                 }}>
+            }}>
                 <View style={{
                     backgroundColor: '#43bb6c',
                     alignSelf: 'center',
-                    width:width-30,
+                    width: width - 30,
                     paddingVertical: 10,
                     marginHorizontal: 10,
-                    marginVertical: 10,
-                    borderRadius:4,
+                    marginVertical: 5,
+                    borderRadius: 4,
 
                 }}>
-                    <Text style={{textAlign: 'center',
+                    <Text style={{
+                        textAlign: 'center',
                         color: '#fff',
                         fontFamily: 'IRANSansMobile_Bold',
-                    fontSize:16}}> تکمیل خرید {countOrder}  </Text>
+                        fontSize: 16
+                    }}> تکمیل خرید {countOrder}  </Text>
                 </View>
             </View>
         );
