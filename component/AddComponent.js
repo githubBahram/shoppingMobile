@@ -1,17 +1,19 @@
 import React from 'react';
-import {Text, TouchableHighlight, View} from 'react-native';
+import {Dimensions, Text, TouchableHighlight, View} from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 import {useDispatch, useSelector} from 'react-redux';
 import {orderAdded, orderRemoved} from '../redux/feature/orders/ordersSlice';
-
+const {width} = Dimensions.get('window');
+import PersianDigit from "./PersianDigit";
 const AddComponent = (props) => {
 
-    const {id, amount} = props;
+    const {id,name,image, amount} = props;
     const order = useSelector(state => state.orders.find(order => order.id === id));
     let orderCount = 0;
     if (order) {
         orderCount = order.count;
     }
+    const persianOrderCount=PersianDigit(orderCount)
     const [count, setCount] = React.useState(orderCount);
     const dispatch = useDispatch();
     if (count === 0) {
@@ -21,7 +23,7 @@ const AddComponent = (props) => {
                 underlayColor="#fff"
                 onPress={() => {
                     setCount(count + 1);
-                    dispatch(orderAdded({id, title: 'p1', amount, count: 1}));
+                    dispatch(orderAdded({id, name,image, amount, count: 1}));
                 }
                 }>
                 <View style={{
@@ -37,6 +39,7 @@ const AddComponent = (props) => {
                         fontFamily: 'IRANSansMobile_Bold',
                         fontSize: 12,
                         color: '#43bb6c',
+                        width:width/4
                     }}>
                         افزودن
                     </Text>
@@ -47,14 +50,12 @@ const AddComponent = (props) => {
         return (
             <View style={{
                 marginBottom: 10,
-                paddingHorizontal: 50,
             }}>
                 <View
                     style={{
                         flexDirection: 'row',
-                        justifyContent: 'space-around',
                     }}
-                >
+                  >
                     <TouchableHighlight
                         activeOpacity={0.6}
                         underlayColor="#fff"
@@ -78,8 +79,9 @@ const AddComponent = (props) => {
 
                     <View style={{
                         alignSelf: 'center',
+                        marginHorizontal:10
                     }}>
-                        <Text>{count}</Text>
+                        <Text>{persianOrderCount}</Text>
                     </View>
 
                     <TouchableHighlight
@@ -95,9 +97,16 @@ const AddComponent = (props) => {
                             borderColor: '#43bb6c',
                             borderWidth: .8,
                             borderRadius: 5,
+
                         }}>
                             <Icon name="minus" size={12}
-                                  style={{padding: 8, color: 'black', textAlign: 'center', alignSelf: 'center'}}/>
+                                  style={{
+                                      padding: 8,
+                                      color: 'black',
+                                      textAlign: 'center',
+                                      alignSelf: 'center',
+
+                                  }}/>
                         </View>
                     </TouchableHighlight>
                 </View>

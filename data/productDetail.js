@@ -2,48 +2,57 @@ export default [
     {
         id: '1',
         name: 'شیر 1 کیلویی پرچرب ',
-        image: require('../assets/product/1.jpg'),
+        amount:1500,
+       image: require('../assets/product/1.png'),
 
     },
     {
         id: '2',
         name: 'ماست 7 کیلویی سون',
-        image: require('../assets/product/2.jpg'),
+        amount:1500,
+        image: require('../assets/product/2.png'),
     },
     {
         id: '3',
         name: 'کره بادام زمینی 350 گرم',
-        image: require('../assets/product/3.jpg'),
+        amount:1500,
+        image: require('../assets/product/3.png'),
     },
     {
         id: '4',
         name: 'خامه و عسل مهران',
-        image: require('../assets/product/4.jpg'),
+        amount:1500,
+        image: require('../assets/product/4.png'),
     },
     {
         id: '5',
         name: 'پنیر گلپایگان',
-        image: require('../assets/product/5.jpg'),
+        amount:1500,
+        image: require('../assets/product/5.png'),
     },
     {
         id: '6',
         name: 'کشک و دوغ خمین',
-        image: require('../assets/product/6.jpg'),
+        amount:1500,
+        image: require('../assets/product/6.png'),
     },
     {
         id: '7',
         name: 'دوغ ترش محلات',
-        image: require('../assets/product/7.jpg'),
+        amount:1500,
+        image: require('../assets/product/7.png'),
     },
     {
         id: '8',
         name: 'دوغ ترش محلات',
-        image: require('../assets/product/7.jpg'),
+        amount:1500,
+        image: require('../assets/product/7.png'),
     },
     {
         id: '9',
         name: 'دوغ ترش محلات',
-        image: require('../assets/product/7.jpg'),
+        amount:1500,
+        image: require('../assets/product/7.png'),
     },
 
 ];

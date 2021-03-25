@@ -17,7 +17,7 @@ import {TextInput} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Feather';
 import AddComponent from './AddComponent';
 import OrderConfirmed from './OrderConfirmed';
-
+import PersianDigit from "./PersianDigit";
 import dayries from '../data/dayries';
 import productDetail from '../data/productDetail';
 
@@ -69,6 +69,7 @@ const ProductCategory = ({item}) => {
 };
 
 const ProductDetail = ({item}) => {
+    const amount = PersianDigit(item.amount)
     return (
         <View style={{
             flexDirection: 'row',
@@ -102,9 +103,14 @@ const ProductDetail = ({item}) => {
                         fontFamily: 'IRANSansMobile_Bold',
                         fontSize: 12,
                     }}>
-                        1600تومان
+                        {amount}تومان
                     </Text>
-                    <AddComponent id={item.id} amount={Number(1600)}/>
+                    <View style={{
+                        alignSelf:'center'
+                    }}>
+                        <AddComponent id={item.id} name={item.name} image={item.image} item={item}
+                                      amount={Number(1600)}/>
+                    </View>
                 </View>
 
             </View>
@@ -122,6 +128,7 @@ const Product = ({navigation}) => {
             backgroundColor: '#fff',
             paddingVertical: 5,
 
+
         },
         headerFiltering: {
             flexDirection: 'row',
@@ -129,6 +136,7 @@ const Product = ({navigation}) => {
             marginBottom: 5,
             paddingHorizontal: 10,
             elevation: 1,
+            backgroundColor: '#fff'
         },
         searchIconWrapper: {
             flexDirection: 'row',
@@ -211,7 +219,7 @@ const Product = ({navigation}) => {
                     flex: 1
                 }}>
                 <View style={{
-                    flex: ordersLength > 1 ? 0.9 : 1
+                    flex: ordersLength > 0 ? 0.9 : 1
                 }}>
                     <FlatList
                         key={'#'}
@@ -222,9 +230,9 @@ const Product = ({navigation}) => {
                     />
                 </View>
                 <View style={{
-                    flex: ordersLength > 1 ? 0.1 : 0
+                    flex: ordersLength > 0 ? 0.1 : 0
                 }}>
-                    <OrderConfirmed/>
+                    <OrderConfirmed navigation={navigation}/>
                 </View>
 
             </View>

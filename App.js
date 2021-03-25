@@ -21,6 +21,7 @@ import HomeScreen from './component/HomeScreen';
 import Product from './component/Product';
 import store from './redux/store';
 import {Provider} from 'react-redux';
+import Cart from "./component/Cart";
 
 const Container = styled.SafeAreaView`
   flex: 1
@@ -47,6 +48,7 @@ const App = () => {
                         <Stack.Screen name="EnterPhoneNumber" component={EnterPhoneNumber}/>
                         <Stack.Screen name="Tabs" component={Tabs}/>
                         <Stack.Screen name="Profile" component={Profile}/>
+                        <Stack.Screen name="Cart" component={Cart}/>
                     </Stack.Navigator>
                 </NavigationContainer>
             </SafeAreaProvider>

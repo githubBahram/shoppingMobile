@@ -1,14 +1,15 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = [
-    {id: null, title: '', amount: 0, count: 0},
+    {id: 0, name: '', image: '', amount: 0, count: 0},
 ];
 const ordersSlice = createSlice({
     name: 'orders',
     initialState,
     reducers: {
         orderAdded(state, action) {
-            const {id, count} = action.payload;
+            const {id, name, amount, count} = action.payload;
+
             const existOrder = state.find(order => order.id === id);
 
             if (existOrder) {
@@ -23,7 +24,7 @@ const ordersSlice = createSlice({
             const existOrderRemove = state.find(order => order.id === id);
 
             if (existOrderRemove) {
-                if (count === 1) {
+                if (count === 1 || count ===0) {
                     var index = state.indexOf(existOrderRemove);
                     if (index > -1) {
                         state.splice(index, 1);
@@ -34,11 +35,12 @@ const ordersSlice = createSlice({
             }
         },
     },
-    prepare(id, title, amount, count) {
+    prepare(id, name, image, amount, count) {
         return {
             payload: {
                 id,
-                title,
+                name,
+                image,
                 amount,
                 count,
             },
