@@ -53,20 +53,58 @@ const CartDetail = (props) => {
                     </View>
                 </View>
                 <View style={styles.addButton}>
-                    <AddComponent id={id} name={name} image={image} amount={Number(1600)}/>
+                    <AddComponent id={id} name={name} image={image} amount={amount}/>
                 </View>
             </View>
-
         </View>
     )
 }
 
+const footer = () => {
+    const orders = useSelector(state => state.orders);
+    let ordersCount = 0
+    let sumAmount = 0;
 
+    orders.forEach(item => {
+        sumAmount += (item.amount * item.count)
+        ordersCount += item.count
+    })
+
+    const sumAmountPersian = PersianDigit(sumAmount)
+    const percentAmount = 0
+    const percentAmountPer = PersianDigit(0)
+    const sumTotalAmount = PersianDigit(sumAmount - percentAmount)
+    const orderCountPer=PersianDigit(ordersCount)
+
+
+    return (
+        <View style={styles.footer}>
+            <View style={[styles.footerItemStyle, styles.footerHeadTitleWrapper]}>
+                <Text style={styles.footerHeadTitle}>جزئیات سبد</Text>
+                <Text style={styles.footerHeadSubtitle}> {orderCountPer} کالا</Text>
+            </View>
+            <View style={styles.footerItemStyle}>
+                <Text style={styles.footerBodyTitle}>قیمت کالاها</Text>
+                <Text style={styles.footerBodySubTitle}>{sumAmountPersian}تومان</Text>
+            </View>
+            <View style={styles.footerItemStyle}>
+                <Text style={styles.footerBodyTitle}>تخفیف کالاها</Text>
+                <Text style={[styles.footerBodySubTitle, styles.footerPercent]}>{percentAmountPer}تومان</Text>
+            </View>
+            <View style={styles.footerItemStyle}>
+                <Text style={styles.footerBodyTitle}>جمع سبد خرید</Text>
+                <Text style={styles.footerBodySubTitle}>{sumTotalAmount}تومان</Text>
+            </View>
+            <View style={styles.footerItemStyle}></View>
+
+        </View>
+    )
+}
 const Cart = ({navigation}) => {
     const orders = useSelector(state => state.orders);
-    var sumAmount = 0;
-    orders.forEach(item => sumAmount += item.amount)
-    const sumAmountPersian=PersianDigit(sumAmount)
+    let sumAmount = 0;
+    orders.forEach(item => sumAmount += (item.amount * item.count))
+    const sumAmountPersian = PersianDigit(sumAmount)
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerTitle: props => <Header/>,
@@ -76,11 +114,15 @@ const Cart = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.cartWrapper}>
-                <FlatList
-                    data={orders}
-                    renderItem={({item}) => <CartDetail item={item}/>}
-                    keyExtractor={(item) => item.id}
-                    showsVerticalScrollIndicator={false}/>
+                <View style={styles.cartDetailWrapper}>
+                    <FlatList
+                        data={orders}
+                        renderItem={({item}) => <CartDetail item={item}/>}
+                        keyExtractor={(item) => item.id}
+                        showsVerticalScrollIndicator={false}
+                        ListFooterComponent={footer}
+                    />
+                </View>
 
             </View>
             <View style={{
@@ -103,8 +145,7 @@ const Cart = ({navigation}) => {
                         paddingVertical: 10,
                         borderRadius: 5,
 
-                    }}
-                >
+                    }}>
                     <Text style={{
                         color: '#fff',
                         fontFamily: 'IRANSansMobile_Bold',
@@ -123,22 +164,55 @@ const Cart = ({navigation}) => {
                         {sumAmountPersian}</Text>
                 </View>
             </View>
-
         </View>
     );
 
 };
 
 const styles = StyleSheet.create({
+    footer: {
+        backgroundColor: '#fff',
+        borderRadius: 5,
+        paddingVertical: 10
+    },
+    footerItemStyle: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingHorizontal: 20,
+        marginBottom: 5
+    },
+    footerHeadTitleWrapper: {
+        marginBottom: 15
+    },
+    footerHeadTitle: {
+        fontFamily: 'IRANSansMobile_Bold',
+        fontSize: 12,
+    },
+    footerHeadSubtitle: {
+        fontFamily: 'IRANSansMobile',
+        fontSize: 12,
+    },
+    footerBodyTitle: {
+        fontFamily: 'IRANSansMobile',
+        fontSize: 12,
+    },
+    footerBodySubTitle: {
+        fontFamily: 'IRANSansMobile_Bold',
+        fontSize: 12,
+    },
+    footerPercent: {
+        color: '#43bb6c'
+    },
     container: {
         flex: 1,
+    },
+    cartDetailWrapper: {
+        paddingHorizontal: 20,
+        marginTop: 5,
 
     },
     cartWrapper: {
-        paddingHorizontal: 20,
-        marginTop: 5,
-        flex: 0.9,
-
+        flex: 0.9
     },
     cartTitle: {
 

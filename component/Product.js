@@ -109,7 +109,7 @@ const ProductDetail = ({item}) => {
                         alignSelf:'center'
                     }}>
                         <AddComponent id={item.id} name={item.name} image={item.image} item={item}
-                                      amount={Number(1600)}/>
+                                      amount={item.amount}/>
                     </View>
                 </View>
 
@@ -127,8 +127,6 @@ const Product = ({navigation}) => {
             marginTop: 1,
             backgroundColor: '#fff',
             paddingVertical: 5,
-
-
         },
         headerFiltering: {
             flexDirection: 'row',

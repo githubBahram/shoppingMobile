@@ -2,14 +2,14 @@ export default [
     {
         id: '1',
         name: 'شیر 1 کیلویی پرچرب ',
-        amount:1500,
+        amount:100,
        image: require('../assets/product/1.png'),
 
     },
     {
         id: '2',
         name: 'ماست 7 کیلویی سون',
-        amount:1500,
+        amount:1300,
         image: require('../assets/product/2.png'),
     },
     {
@@ -27,7 +27,7 @@ export default [
     {
         id: '5',
         name: 'پنیر گلپایگان',
-        amount:1500,
+        amount:1900,
         image: require('../assets/product/5.png'),
     },
     {
@@ -51,7 +51,7 @@ export default [
     {
         id: '9',
         name: 'دوغ ترش محلات',
-        amount:1500,
+        amount:2600,
         image: require('../assets/product/7.png'),
     },
 
