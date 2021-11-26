@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = [
-    {id: 0, name: '', image: '', amount: 0, count: 0},
+
 ];
 const ordersSlice = createSlice({
     name: 'orders',
@@ -24,7 +24,7 @@ const ordersSlice = createSlice({
             const existOrderRemove = state.find(order => order.id === id);
 
             if (existOrderRemove) {
-                if (count === 1 || count ===0) {
+                if (count === 1) {
                     var index = state.indexOf(existOrderRemove);
                     if (index > -1) {
                         state.splice(index, 1);

@@ -1,51 +1,44 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
 
-const initialState = [
+const initialState = {
+    categories: [],
+    status: 'idle',
+    error: null,
+};
+export const fetchCategories = createAsyncThunk('categories/fetchCategories', async () => {
+        try {
+            console.log('fetch categories');
+            const response = await fetch('https://shahrvand-shahrvand.apps.ir-thr-at1.arvan.run/categoryManager/categories/isRoot/companies/1');
+            console.log('response');
+            console.log(response);
+            let json = await response.json();
+            console.log('json');
+            console.log(json);
+            return json;
+        } catch (error) {
+            console.log(error);
+        }
 
-];
-const ordersSlice = createSlice({
-    name: 'orders',
+    },
+);
+const categoriesSlice = createSlice({
+    name: 'categories',
     initialState,
-    reducers: {
-        orderAdded(state, action) {
-            const {id, name, amount, count} = action.payload;
+    reducers: {},
+    extraReducers: {
+        [fetchCategories.fulfilled]: (state, action) => {
+            state.status = 'succeeded';
+            console.log('action.payload');
+            console.log(action.payload);
 
-            const existOrder = state.find(order => order.id === id);
+              state.push(action.payload);
+            console.log('categories');
+            console.log(state.categories);
 
-            if (existOrder) {
-                existOrder.count = count + 1;
-            } else {
-                state.push(action.payload);
-            }
-        },
-        orderRemoved(state, action) {
-            const {id, count} = action.payload;
-
-            const existOrderRemove = state.find(order => order.id === id);
-
-            if (existOrderRemove) {
-                if (count === 1) {
-                    var index = state.indexOf(existOrderRemove);
-                    if (index > -1) {
-                        state.splice(index, 1);
-                    }
-                } else {
-                    existOrderRemove.count = count - 1;
-                }
-            }
         },
     },
-    prepare(id, name, image, amount, count) {
-        return {
-            payload: {
-                id,
-                name,
-                image,
-                amount,
-                count,
-            },
-        };
-    },
+
 });
-export const {orderAdded, orderRemoved} = ordersSlice.actions;
-export default ordersSlice.reducer;
+export const selectAllCategories = (state) => state.categories;
+
+export default categoriesSlice.reducer;
